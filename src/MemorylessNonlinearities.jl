@@ -13,9 +13,7 @@ end
 
 struct Cauchy{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
-    isrescale::Bool
 end
-Cauchy(k) = Cauchy(k, false)
 
 struct Clipping{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
@@ -45,8 +43,7 @@ Cauchy nonlinearity.
 """
 cauchy(x::S, k::T) where {S<:Real,T<:Real} = (2 * (x / k)) / (1 + (x / k)^2)
 function filt(f::Cauchy, x::AbstractVector)
-    y = cauchy.(x, f.k)
-    f.isrescale ? minmaxrescale(y, -f.k, f.k) : y
+    cauchy.(x, f.k)
 end
 
 """

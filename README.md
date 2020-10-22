@@ -11,13 +11,13 @@ using MemorylessNonlinearities
 
 x = -10:0.1:10
 gs = [(Blanking, 3.0),
-      (Cauchy, (3.0, true)),
+      (Cauchy, 3.0),
       (Clipping, 3.0),
       (HampelThreePart, (3.0, 4.0, 5.0)),
       (TurkeyBiweight, 5.0)]
 p = plot(size=(1000, 800), legend=:outertopright)
 for (g, params) in gs
-    plot!(p, x, filt(g(params...), x); linewidth=2, label=string(g))
+    plot!(p, x, minmaxrescale(filt(g(params...), x), -1.0, 1.0); linewidth=2, label=string(g))
 end
 p
 ```
