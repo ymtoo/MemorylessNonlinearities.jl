@@ -1,7 +1,7 @@
 module MemorylessNonlinearities
 
 export Blanking, Cauchy, Clipping, HampelThreePart, TurkeyBiweight
-export filt
+export filt, minmaxrescale
 
 include("utils.jl")
 
