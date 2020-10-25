@@ -1,6 +1,8 @@
 module MemorylessNonlinearities
 
-export Blanking, Cauchy, Clipping, HampelThreePart, TurkeyBiweight
+using AlphaStableDistributions, QuadGK
+
+export Blanking, Cauchy, Clipping, HampelThreePart, SαS, TurkeyBiweight
 export filt, minmaxrescale
 
 include("utils.jl")
@@ -24,6 +26,13 @@ struct HampelThreePart{T<:Real} <: AbstractMemorylessNonlinearity
     b::T
     c::T
 end
+
+struct SαS{T<:Real} <: AbstractMemorylessNonlinearity 
+    α::T
+    scale::T
+    location::T
+end
+SαS(α) = SαS(α, 1.0, 0.0)
 
 struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
@@ -71,6 +80,20 @@ function hampelthreepart(x::S, a::T, b::T, c::T) where {S<:Real,T<:Real}
 end
 function filt(f::HampelThreePart, x::AbstractVector)
     hampelthreepart.(x, f.a, f.b, f.c)
+end
+
+"""
+Symmetric Alpha Stable nonlinearity.
+
+`x` is standard symmetric alpha stable distributed.
+"""
+function sαs(x::S, α) where {S<:Real}
+    num, _ = quadgk(t -> t * sin(t * x) * exp(-t^α), 0, Inf) 
+    den, _ = quadgk(t -> cos(t * x) * exp(-t^α), 0, Inf)
+    num / den
+end
+function filt(f::SαS, x::AbstractVector)
+    sαs.((x .- f.location) ./ f.scale, f.α)
 end
 
 """
