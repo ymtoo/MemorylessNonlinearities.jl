@@ -3,6 +3,10 @@ uuid = "0fdea88e-d355-4a76-8041-e2244589d5bd"
 authors = ["Too Yuen Min"]
 version = "0.1.0"
 
+[deps]
+AlphaStableDistributions = "f20549b4-2d50-407f-863c-cdd202ba59a3"
+QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+
 [compat]
 julia = "1.5"
 
