@@ -14,6 +14,7 @@ gs = [(Blanking, 3.0),
       (Cauchy, 3.0),
       (Clipping, 3.0),
       (HampelThreePart, (3.0, 4.0, 5.0)),
+      (SαS, 1.5),
       (TurkeyBiweight, 5.0)]
 p = plot(size=(1000, 800), legend=:outertopright)
 for (g, params) in gs
