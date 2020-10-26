@@ -18,7 +18,8 @@ gs = [(Blanking, 3.0),
       (TurkeyBiweight, 5.0)]
 p = plot(size=(800, 600), legend=:outertopright)
 for (g, params) in gs
-    plot!(p, x, minmaxrescale(filt(g(params...), x), -1.0, 1.0); linewidth=2, label=string(g))
+    plot!(p, x, minmaxrescale(filt(g(params...), x), -1.0, 1.0); 
+          linewidth=2, label=string(g))
 end
 p
 ```
@@ -28,7 +29,8 @@ x = -10:0.1:10
 αs = 1.0:0.1:2.0
 p = plot(size=(800, 600), legend=:outertopright)
 for α in αs
-    plot!(p, x, minmaxrescale(filt(SαS(α), x), -1.0, 1.0); linewidth=2, label="α=$(α)")
+    plot!(p, x, minmaxrescale(filt(SαS(α), x), -1.0, 1.0); 
+          linewidth=2, label="α=$(α)")
 end
 p
 ```
