@@ -88,8 +88,8 @@ Symmetric Alpha Stable nonlinearity.
 `x` is standard symmetric alpha stable distributed.
 """
 function sαs(x::S, α) where {S<:Real}
-    num, _ = quadgk(t -> t * sin(t * x) * exp(-t^α), 0, Inf) 
-    den, _ = quadgk(t -> cos(t * x) * exp(-t^α), 0, Inf)
+    num, _ = quadgk(t -> t * sin(t * x) * exp(-t^α), 0, Inf; rtol=1e-6, atol=1e-9) 
+    den, _ = quadgk(t -> cos(t * x) * exp(-t^α), 0, Inf; rtol=1e-6, atol=1e-9)
     num / den
 end
 function filt(f::SαS, x::AbstractVector)
