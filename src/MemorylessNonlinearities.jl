@@ -37,8 +37,8 @@ struct SαS{T<:Real} <: AbstractMemorylessNonlinearity
     location::T
     approx::Bool
 end
-SαS(α, scale, location) = SαS(α, scale, location, false)
-SαS(α) = SαS(α, 1.0, 0.0, false)
+SαS(α, scale, location) = SαS(α, scale, location, true)
+SαS(α) = SαS(α, 1.0, 0.0, true)
 
 struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
