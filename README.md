@@ -7,7 +7,7 @@ This package implements memoryless nonlinearity functions.
 
 ## Usage
 ```julia
-using MemorylessNonlinearities
+using MemorylessNonlinearities, Plots
 
 x = -10:0.1:10
 gs = [(Blanking, 3.0),
