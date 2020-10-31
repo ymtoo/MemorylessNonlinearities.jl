@@ -7,9 +7,11 @@ export filt, minmaxrescale
 
 include("utils.jl")
 
+const DATADIR = joinpath(dirname(pathof(@__MODULE__)), "..", "data")
+
 const _xsas = -200:0.1:200
 const _αsas = 1.0:0.001:2.0
-const _ysas = readdlm(joinpath(@__DIR__, "..", "data/sas.csv"), ',', Float64)
+const _ysas = readdlm(joinpath(DATADIR, "sas.csv"), ',', Float64)
 
 abstract type AbstractMemorylessNonlinearity end
 
