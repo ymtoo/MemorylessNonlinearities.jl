@@ -6,32 +6,63 @@
 This package implements memoryless nonlinearity functions.
 
 ## Usage
+
 ```julia
 using MemorylessNonlinearities, Plots
 
 x = -10:0.1:10
-gs = [(Blanking, 3.0),
-      (Cauchy, 3.0),
-      (Clipping, 3.0),
-      (HampelThreePart, (3.0, 4.0, 5.0)),
-      (SαS, 1.5),
-      (TurkeyBiweight, 5.0)]
-p = plot(size=(800, 600), legend=:outertopright)
-for (g, params) in gs
-    plot!(p, x, minmaxrescale(filt(g(params...), x), -1.0, 1.0); 
-          linewidth=2, label=string(g))
+
+function plotnonlinearity(x, f, params; size=(800, 600))
+    p = plot(size=size, legend=:outertopright)
+    for param in params
+        label = join([String(name) * "=$(p)" for (name, p) in zip(
+                     fieldnames(f), param)], ",")
+        plot!(p, x, minmaxrescale(filt(f(param...), x), -1.0, 1.0); 
+              linewidth=2, label=label)
+    end
+    p
 end
-p
 ```
-![window](nonlinearities.png)
+
+### Blanking 
+
 ```julia
-x = -10:0.1:10
-αs = 1.0:0.1:2.0
-p = plot(size=(800, 600), legend=:outertopright)
-for α in αs
-    plot!(p, x, minmaxrescale(filt(SαS(α), x), -1.0, 1.0); 
-          linewidth=2, label="α=$(α)")
-end
-p
+ks = 1:1:5
+plotnonlinearity(x, Blanking, ks)
 ```
-![window](sas.png)
+![window](images/blanking.png)
+
+### Cauchy
+```julia
+ks = 1:1:5
+plotnonlinearity(x, Cauchy, ks)
+```
+![window](images/cauchy.png)
+
+### Clipping
+```julia
+ks = 1:1:5
+plotnonlinearity(x, Clipping, ks)
+```
+![window](images/clipping.png)
+
+### HampelThreePart
+```julia
+abcs = ((1, 2, 3), (2, 3, 4), (3, 4, 5))
+plotnonlinearity(x, HampelThreePart, abcs)
+```
+![window](images/hampelthreepart.png)
+
+### SαS (approximation)
+```julia
+αs = 1:0.2:2
+plotnonlinearity(x, SαS, αs)
+```
+![window](images/sas.png)
+
+### TurkeyBiweight
+```julia
+ks = 1:1:5
+plotnonlinearity(x, TurkeyBiweight, ks)
+```
+![window](images/turkeybiweight.png)
