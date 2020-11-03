@@ -73,9 +73,7 @@ plotnonlinearity(x, TurkeyBiweight, ks)
 ![window](images/turkeybiweight.png)
 
 ## Performance
-Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 are simulated. 
-
-The following nonlinear functions are applied to filter the noise.
+Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 are simulated. The following nonlinear functions are applied to the simulated data to filter the noise.
 | Nonlinear       | Parameter                    |
 | --------------- | ---------------------------- |
 | Blanking        | k=3.0                        |
@@ -85,7 +83,7 @@ The following nonlinear functions are applied to filter the noise.
 | SαS             | α=1.5,scale=1.0,location=0.0 |
 | TurkeyBiweight  | k=3.0                        |
 
-Root Mean Squared Errors (RMSEs) of filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 
+Root Mean Squared Errors (RMSEs) between the true chirp signals and filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 
 ```julia
 include("perf/simulate.jl")
 
