@@ -56,7 +56,7 @@ plotnonlinearity(x, HampelThreePart, abcs)
 ```
 ![window](images/hampelthreepart.png)
 
-### SαS (approximated by 2D lookup table)
+### Nonlinearity in locally optimal detectors based on IID SαS noise(approximated by 2D lookup table)
 ![window](images/sas-eqn.png)
 ```julia
 αs = 1:0.2:2
