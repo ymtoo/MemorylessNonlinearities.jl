@@ -1,0 +1,8 @@
+authors = ["Too Yuen Min"]
+
+[deps]
+AlphaStableDistributions = "f20549b4-2d50-407f-863c-cdd202ba59a3"
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+MemorylessNonlinearities = "0fdea88e-d355-4a76-8041-e2244589d5bd"
+SignalAnalysis = "df1fea92-c066-49dd-8b36-eace3378ea47"
