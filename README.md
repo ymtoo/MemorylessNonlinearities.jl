@@ -25,7 +25,7 @@ end
 ```
 
 ### Blanking 
-
+![window](images/blanking-eqn.png)
 ```julia
 ks = 1:1:5
 plotnonlinearity(x, Blanking, ks)
@@ -33,6 +33,7 @@ plotnonlinearity(x, Blanking, ks)
 ![window](images/blanking.png)
 
 ### Cauchy
+![window](images/cauchy-eqn.png)
 ```julia
 ks = 1:1:5
 plotnonlinearity(x, Cauchy, ks)
@@ -40,6 +41,7 @@ plotnonlinearity(x, Cauchy, ks)
 ![window](images/cauchy.png)
 
 ### Clipping
+![window](images/clipping-eqn.png)
 ```julia
 ks = 1:1:5
 plotnonlinearity(x, Clipping, ks)
@@ -47,13 +49,15 @@ plotnonlinearity(x, Clipping, ks)
 ![window](images/clipping.png)
 
 ### HampelThreePart
+![window](images/hampelthreepart-eqn.png)
 ```julia
 abcs = ((1, 2, 3), (2, 3, 4), (3, 4, 5))
 plotnonlinearity(x, HampelThreePart, abcs)
 ```
 ![window](images/hampelthreepart.png)
 
-### SαS (approximation)
+### SαS (approximated by 2D lookup table)
+![window](images/sas-eqn.png)
 ```julia
 αs = 1:0.2:2
 plotnonlinearity(x, SαS, αs)
@@ -61,6 +65,7 @@ plotnonlinearity(x, SαS, αs)
 ![window](images/sas.png)
 
 ### TurkeyBiweight
+![window](images/turkeybiweight-eqn.png)
 ```julia
 ks = 1:1:5
 plotnonlinearity(x, TurkeyBiweight, ks)
