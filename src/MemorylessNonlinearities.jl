@@ -2,7 +2,7 @@ module MemorylessNonlinearities
 
 using AlphaStableDistributions, DelimitedFiles, Interpolations, QuadGK
 
-export Blanking, Cauchy, Clipping, HampelThreePart, SαS, TurkeyBiweight
+export Blanking, CauchyNL, Clipping, HampelThreePart, SαSNL, TurkeyBiweight
 export filt, minmaxrescale
 
 include("utils.jl")
@@ -19,7 +19,7 @@ struct Blanking{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
-struct Cauchy{T<:Real} <: AbstractMemorylessNonlinearity
+struct CauchyNL{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
@@ -33,14 +33,14 @@ struct HampelThreePart{T<:Real} <: AbstractMemorylessNonlinearity
     c::T
 end
 
-struct SαS{T<:Real} <: AbstractMemorylessNonlinearity 
+struct SαSNL{T<:Real} <: AbstractMemorylessNonlinearity 
     α::T
     scale::T
     location::T
     approx::Bool
 end
-SαS(α, scale, location) = SαS(α, scale, location, true)
-SαS(α) = SαS(α, 1.0, 0.0, true)
+SαSNL(α, scale, location) = SαSNL(α, scale, location, true)
+SαSNL(α) = SαSNL(α, 1.0, 0.0, true)
 
 struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
@@ -58,9 +58,9 @@ end
 """
 Cauchy nonlinearity.
 """
-cauchy(x::S, k::T) where {S<:Real,T<:Real} = (2 * (x / k)) / (1 + (x / k)^2)
-function filt(f::Cauchy, x::AbstractVector)
-    cauchy.(x, f.k)
+cauchynl(x::S, k::T) where {S<:Real,T<:Real} = (2 * (x / k)) / (1 + (x / k)^2)
+function filt(f::CauchyNL, x::AbstractVector)
+    cauchynl.(x, f.k)
 end
 
 """
@@ -95,13 +95,13 @@ Symmetric Alpha Stable nonlinearity.
 
 `x` is standard symmetric alpha stable distributed.
 """
-function sαs(x::S, α) where {S<:Real}
+function sαsnl(x::S, α) where {S<:Real}
     num, _ = quadgk(t -> t * sin(t * x) * exp(-t^α), 0, Inf; atol=1e-12, order=3) 
     den, _ = quadgk(t -> cos(t * x) * exp(-t^α), 0, Inf; atol=1e-12, order=3)
     num / den
 end
 
-function filt(f::SαS, x::AbstractVector)
+function filt(f::SαSNL, x::AbstractVector)
     (abs(f.α - 2.0) < 0.001) && return (x ./ 2) # Gaussian
     (abs(f.α - 1.0) < 0.001) && return (2 .* x) ./ (1 .+ x.^2) # Cauchy 
     xstd = (collect(x) .- f.location) ./ f.scale
@@ -114,7 +114,7 @@ function filt(f::SαS, x::AbstractVector)
         xstd[(xstd .<= maxval) .& (xstd .>= minval)] .= itp(f.α, xstd[(xstd .<= maxval) .& (xstd .>= minval)])
         xstd
     else
-        sαs.(xstd, f.α)
+        sαsnl.(xstd, f.α)
     end
 end
 

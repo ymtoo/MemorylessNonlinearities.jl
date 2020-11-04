@@ -32,11 +32,11 @@ plotnonlinearity(x, Blanking, ks)
 ```
 ![window](images/blanking.png)
 
-### Cauchy
+### CauchyNL
 ![window](images/cauchy-eqn.png)
 ```julia
 ks = 1:1:5
-plotnonlinearity(x, Cauchy, ks)
+plotnonlinearity(x, CauchyNL, ks)
 ```
 ![window](images/cauchy.png)
 
@@ -56,11 +56,12 @@ plotnonlinearity(x, HampelThreePart, abcs)
 ```
 ![window](images/hampelthreepart.png)
 
-### Nonlinearity in locally optimal detectors based on IID SαS noise(approximated by 2D lookup table)
+### SαSNL
+Nonlinearity in locally optimal detectors based on IID SαS noise(approximated by 2D lookup table)
 ![window](images/sas-eqn.png)
 ```julia
 αs = 1:0.2:2
-plotnonlinearity(x, SαS, αs)
+plotnonlinearity(x, SαSNL, αs)
 ```
 ![window](images/sas.png)
 
@@ -77,10 +78,10 @@ Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0,
 | Nonlinear       | Parameter                    |
 | --------------- | ---------------------------- |
 | Blanking        | k=3.0                        |
-| Cauchy          | k=1.0                        |
+| CauchyNL        | k=1.0                        |
 | Clipping        | k=1.0                        |
 | HampelThreePart | a=1.0,b=2.0,c=3.0            |
-| SαS             | α=1.5,scale=1.0,location=0.0 |
+| SαSNL           | α=1.5,scale=1.0,location=0.0 |
 | TurkeyBiweight  | k=3.0                        |
 
 Root Mean Squared Errors (RMSEs) between the true chirp signals and filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 

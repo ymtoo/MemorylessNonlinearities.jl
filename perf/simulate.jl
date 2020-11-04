@@ -37,10 +37,10 @@ function simulate(gs=nothing;
                   freqs=(100, 1000),
                   fs=9600)
     (gs === nothing) && (gs = [(Blanking, 3 * _scale), 
-                               (MemorylessNonlinearities.Cauchy, _scale), 
+                               (CauchyNL, _scale), 
                                (Clipping, _scale),
                                (HampelThreePart, _scale, 2 * _scale, 3 * _scale),
-                               (SαS, _α, _scale, _location),
+                               (SαSNL, _α, _scale, _location),
                                (TurkeyBiweight, 3 * _scale)])
     ngsnrs = length(gsnrs)
     E = zeros(nrealizations, ngsnrs, length(gs))
