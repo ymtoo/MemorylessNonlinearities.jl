@@ -74,7 +74,7 @@ plotnonlinearity(x, TurkeyBiweight, ks)
 ![window](images/turkeybiweight.png)
 
 ## Performance
-Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 are simulated. The following nonlinear functions are applied to the simulated data to filter the noise.
+Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 were simulated. The following nonlinear functions were applied to the simulated data to filter the noise.
 | Nonlinear       | Parameter                 |
 | --------------- | ------------------------- |
 | Blanking        | k=3σ                      |
