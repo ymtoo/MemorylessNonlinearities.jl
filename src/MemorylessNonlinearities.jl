@@ -3,7 +3,7 @@ module MemorylessNonlinearities
 using AlphaStableDistributions, DelimitedFiles, Interpolations, QuadGK
 
 export Blanking, CauchyNL, Clipping, HampelThreePart, SαSNL, TurkeyBiweight
-export filt, minmaxrescale
+export filt, minmaxrescale, nlnames
 
 include("utils.jl")
 
@@ -40,11 +40,12 @@ struct SαSNL{T<:Real} <: AbstractMemorylessNonlinearity
     approx::Bool
 end
 SαSNL(α, scale, location) = SαSNL(α, scale, location, true)
-SαSNL(α) = SαSNL(α, 1.0, 0.0, true)
 
 struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
+
+nlnames() = [:Blanking, :CauchyNL, :Clipping, :HampelThreePart, :SαSNL, :TurkeyBiweight]
 
 """
 Blanking nonlinearity.
