@@ -83,6 +83,7 @@ Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0,
 | HampelThreePart | a=3σ,b=4σ,c=5σ            |
 | SαSNL           | α=α',scale=c',location=δ' |
 | TurkeyBiweight  | k=3σ                      |
+
 σ is median absolution deviation of the simulated data. a', c' and δ' are the estimated pararamters of IID Symmetric α-Stable distributions based on the simulated data. Root Mean Squared Errors (RMSEs) between the true chirp signals and filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 
 ```julia
 include("perf/simulate.jl")
