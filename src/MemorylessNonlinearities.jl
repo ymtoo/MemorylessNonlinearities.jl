@@ -2,7 +2,7 @@ module MemorylessNonlinearities
 
 using AlphaStableDistributions, DelimitedFiles, Interpolations, QuadGK
 
-export Blanking, CauchyNL, Clipping, HampelThreePart, SαSNL, TurkeyBiweight
+export Blanking, CauchyNL, Clipping, HampelThreePart, SαSNL, SoftClipping, TurkeyBiweight
 export filt, minmaxrescale, nlnames
 
 include("utils.jl")
@@ -41,11 +41,21 @@ struct SαSNL{T<:Real} <: AbstractMemorylessNonlinearity
 end
 SαSNL(α, scale, location) = SαSNL(α, scale, location, true)
 
+struct SoftClipping{T<:Real} <: AbstractMemorylessNonlinearity 
+    k::T
+end
+
 struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
-nlnames() = [:Blanking, :CauchyNL, :Clipping, :HampelThreePart, :SαSNL, :TurkeyBiweight]
+nlnames() = [:Blanking, 
+             :CauchyNL, 
+             :Clipping, 
+             :HampelThreePart, 
+             :SαSNL, 
+             :SoftClipping, 
+             :TurkeyBiweight]
 
 """
 Blanking nonlinearity.
@@ -117,6 +127,16 @@ function filt(f::SαSNL, x::AbstractVector)
     else
         sαsnl.(xstd, f.α)
     end
+end
+
+"""
+Soft clipping nonlinearity.
+"""
+function softclipping(x::S, k::T) where {S<:Real,T<:Real} 
+    abs(x) > k ? sign(x) * k : k * (3*(x / k) / 2) * (1- ((x/ k)^2) / 3)
+end
+function filt(f::SoftClipping, x::AbstractVector)
+    softclipping.(x, f.k)
 end
 
 """

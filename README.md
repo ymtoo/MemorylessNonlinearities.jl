@@ -65,6 +65,14 @@ plotnonlinearity(x, SαSNL, αs)
 ```
 ![window](images/sas.png)
 
+### SoftClipping
+![window](images/softclipping-eqn.png)
+```julia
+ks = 1:1:5
+plotnonlinearity(x, SoftClipping, ks)
+```
+![window](images/softclipping.png)
+
 ### TurkeyBiweight
 ![window](images/turkeybiweight-eqn.png)
 ```julia

@@ -30,6 +30,8 @@ x = [-3,-2,-1,0,1,2,3]
         @test filt(SαSNL(α, 2.0, 0.0), xtmp) ≈ filt(SαSNL(α, 2.0, 0.0, false), xtmp) rtol=0.01
     end
 
+    @test filt(SoftClipping(2.0), x) ≈ [-2.0,-2.0,-1.375,0.0,1.375,2.0,2.0]   
+
     @test filt(TurkeyBiweight(3.0), x) ≈ [-0.0,-0.6173,-0.7901,0.0,0.7901,0.6173,0.0] atol=0.0001
     
 end
