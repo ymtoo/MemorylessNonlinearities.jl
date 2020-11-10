@@ -93,7 +93,7 @@ plotnonlinearity(x, TurkeyBiweight, ks)
 Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 were simulated. The following nonlinear functions were applied to the simulated data to filter the noise.
 | Nonlinear       | Parameter                 |
 | --------------- | ------------------------- |
-| Arctangent      | σ=1 
+| Arctangent      | α=1 
 | Blanking        | k=3σ                      |
 | CauchyNL        | k=3σ                      |
 | Clipping        | k=σ                       |
