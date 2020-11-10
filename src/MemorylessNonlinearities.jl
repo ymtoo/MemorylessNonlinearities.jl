@@ -2,8 +2,19 @@ module MemorylessNonlinearities
 
 using AlphaStableDistributions, DelimitedFiles, Interpolations, QuadGK
 
-export Blanking, CauchyNL, Clipping, HampelThreePart, SαSNL, SoftClipping, TurkeyBiweight
-export filt, minmaxrescale, nlnames
+export 
+    Arctangent,
+    Blanking, 
+    CauchyNL, 
+    Clipping, 
+    HampelThreePart, 
+    SαSNL, 
+    SoftClipping, 
+    TurkeyBiweight,
+
+    filt, 
+    minmaxrescale, 
+    nlnames
 
 include("utils.jl")
 
@@ -14,6 +25,10 @@ const _αsas = 1.0:0.001:2.0
 const _ysas = readdlm(joinpath(DATADIR, "sas.csv"), ',', Float64)
 
 abstract type AbstractMemorylessNonlinearity end
+
+struct Arctangent{T<:Real} <: AbstractMemorylessNonlinearity
+    α::T
+end
 
 struct Blanking{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
@@ -49,7 +64,8 @@ struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
-nlnames() = [:Blanking, 
+nlnames() = [:Arctangent,
+             :Blanking, 
              :CauchyNL, 
              :Clipping, 
              :HampelThreePart, 
@@ -58,13 +74,20 @@ nlnames() = [:Blanking,
              :TurkeyBiweight]
 
 """
+Arctangent nonlinearity.
+"""
+arctangent(x::S, α::T) where {S<:Real,T<:Real} = (2 / π) * atan(α * x)
+function filt(f::Arctangent, x::AbstractVector)
+    arctangent.(x, f.α)
+end
+
+"""
 Blanking nonlinearity.
 """
 blanking(x::S, k::T) where {S<:Real,T<:Real} = abs(x) > k ? S(0) : x
 function filt(f::Blanking, x::AbstractVector)
     blanking.(x, f.k)
 end
-
 
 """
 Cauchy nonlinearity.

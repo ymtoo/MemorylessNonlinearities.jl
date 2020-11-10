@@ -7,6 +7,9 @@ x = [-3,-2,-1,0,1,2,3]
 
     @info "Test MemorylessNonlinearities"
 
+    @test filt(Arctangent(100000), x) ≈ [-1,-1,-1,0,1,1,1] atol=0.0001
+    @test filt(Arctangent(10), x) ≈ [-0.9788,-0.9682,-0.9365,0,0.9365,0.9682,0.9788] atol=0.0001
+
     @test filt(Blanking(1.0), x) == [0,0,-1,0,1,0,0]
 
     @test filt(CauchyNL(1.0), x) == [-0.6,-0.8,-1.0,0.0,1.0,0.8,0.6]

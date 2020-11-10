@@ -50,7 +50,8 @@ function simulate(gs=nothing;
             x = atten .* s .+ v
             σ = mad(x)
             d = fit(SymmetricAlphaStable, x)
-            (gs === nothing) && (gs = [(Blanking, 3 * σ), 
+            (gs === nothing) && (gs = [(Arctangent, 1),
+                                 (Blanking, 3 * σ), 
                                  (CauchyNL, 3 * σ), 
                                  (Clipping, σ),
                                  (HampelThreePart, 3 * σ, 4 * σ, 5 * σ),

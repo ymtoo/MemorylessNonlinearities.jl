@@ -24,6 +24,14 @@ function plotnonlinearity(x, f, params; size=(800, 600))
 end
 ```
 
+### Arctangent
+![window](images/arctangent-eqn.png)
+```julia
+αs = 1:1:10
+plotnonlinearity(x, Arctangent, αs)
+```
+![window](images/arctangent.png)
+
 ### Blanking 
 ![window](images/blanking-eqn.png)
 ```julia
@@ -85,11 +93,13 @@ plotnonlinearity(x, TurkeyBiweight, ks)
 Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 were simulated. The following nonlinear functions were applied to the simulated data to filter the noise.
 | Nonlinear       | Parameter                 |
 | --------------- | ------------------------- |
+| Arctangent      | σ=1 
 | Blanking        | k=3σ                      |
 | CauchyNL        | k=3σ                      |
 | Clipping        | k=σ                       |
 | HampelThreePart | a=3σ,b=4σ,c=5σ            |
 | SαSNL           | α=α',scale=c',location=δ' |
+| SoftClipping    | k=σ                       |
 | TurkeyBiweight  | k=3σ                      |
 
 σ is median absolution deviation of the simulated data. a', c' and δ' are the estimated pararamters of IID Symmetric α-Stable distributions based on the simulated data. Root Mean Squared Errors (RMSEs) between the true chirp signals and filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 
