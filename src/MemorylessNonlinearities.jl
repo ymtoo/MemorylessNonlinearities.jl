@@ -14,7 +14,8 @@ export
 
     filt, 
     minmaxrescale, 
-    nlnames
+    
+    NLnames
 
 include("utils.jl")
 
@@ -64,14 +65,14 @@ struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
-nlnames() = [:Arctangent,
-             :Blanking, 
-             :CauchyNL, 
-             :Clipping, 
-             :HampelThreePart, 
-             :SαSNL, 
-             :SoftClipping, 
-             :TurkeyBiweight]
+const NLnames = [:Arctangent,
+                 :Blanking, 
+                 :CauchyNL, 
+                 :Clipping, 
+                 :HampelThreePart, 
+                 :SαSNL, 
+                 :SoftClipping, 
+                 :TurkeyBiweight]
 
 """
 Arctangent nonlinearity.

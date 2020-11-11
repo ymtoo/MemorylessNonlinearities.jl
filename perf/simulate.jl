@@ -40,7 +40,7 @@ function simulate(gs=nothing;
                   fs=96000,
                   smoothen=nothing)
     ngsnrs = length(gsnrs)
-    ngs = gs === nothing ? length(nlnames()) : length(gs)
+    ngs = gs === nothing ? length(NLnames) : length(gs)
     E = zeros(nrealizations, ngsnrs, ngs)
     for i in 1:ngsnrs
         for j in 1:nrealizations
