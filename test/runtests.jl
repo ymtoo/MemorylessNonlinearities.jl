@@ -37,6 +37,7 @@ x = [-3,-2,-1,0,1,2,3]
 
     @test filt(TurkeyBiweight(3.0), x) ≈ [-0.0,-0.6173,-0.7901,0.0,0.7901,0.6173,0.0] atol=0.0001
     
+    @test filt(InverseHyperbolicSine(1.0), x) ≈ [-1.8184,-1.4436,-0.8814,0.0,0.8814,1.4436,1.8184] atol=0.0001
 end
 
 @testset "utils.jl" begin

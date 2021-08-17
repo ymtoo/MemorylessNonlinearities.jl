@@ -11,6 +11,7 @@ export
     SαSNL, 
     SoftClipping, 
     TurkeyBiweight,
+    InverseHyperbolicSine,
 
     filt, 
     minmaxrescale, 
@@ -65,6 +66,10 @@ struct TurkeyBiweight{T<:Real} <: AbstractMemorylessNonlinearity
     k::T
 end
 
+struct InverseHyperbolicSine{T<:Real} <: AbstractMemorylessNonlinearity
+    θ::T
+end
+
 const NLnames = [:Arctangent,
                  :Blanking, 
                  :CauchyNL, 
@@ -72,7 +77,8 @@ const NLnames = [:Arctangent,
                  :HampelThreePart, 
                  :SαSNL, 
                  :SoftClipping, 
-                 :TurkeyBiweight]
+                 :TurkeyBiweight,
+                 :InverseHyperbolicSine]
 
 """
 Arctangent nonlinearity.
@@ -135,7 +141,6 @@ function sαsnl(x::S, α) where {S<:Real}
     den, _ = quadgk(t -> cos(t * x) * exp(-t^α), 0, Inf; atol=1e-12, order=3)
     num / den
 end
-
 function filt(f::SαSNL, x::AbstractVector)
     (abs(f.α - 2.0) < 0.001) && return (x ./ 2) # Gaussian
     (abs(f.α - 1.0) < 0.001) && return (2 .* x) ./ (1 .+ x.^2) # Cauchy 
@@ -169,6 +174,14 @@ Turkey's biweight nonlinearity.
 turkeybiweight(x::S, k::T) where {S<:Real,T<:Real} = abs(x) > k ? 0. : x * (1 - (x / k)^2)^2 
 function filt(f::TurkeyBiweight, x::AbstractVector)
     turkeybiweight.(x, f.k)
+end
+
+"""
+Inverse hyperbolic sine nonlinearity.
+"""
+inversehyperbolicsine(x::S, θ::T) where {S<:Real,T<:Real} = asinh(x*θ)
+function filt(f::InverseHyperbolicSine, x::AbstractVector)
+    inversehyperbolicsine.(x, f.θ)
 end
 
 end

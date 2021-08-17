@@ -89,18 +89,27 @@ plotnonlinearity(x, TurkeyBiweight, ks)
 ```
 ![window](images/turkeybiweight.png)
 
+### InverseHyperbolicSine
+![window](images/arcsinh-eqn.png)
+```julia
+θs = 1:1:10
+plotnonlinearity(x, InverseHyperbolicSine, θs)
+```
+![window](images/arcsinh.png)
+
 ## Performance
 Chirp signals with Symmetric α-Stable noise parameterized by α=1.5, scale=1.0, location=0.0 were simulated. The following nonlinear functions were applied to the simulated data to filter the noise.
-| Nonlinear       | Parameter                 |
-| --------------- | ------------------------- |
-| Arctangent      | α=1 
-| Blanking        | k=3σ                      |
-| CauchyNL        | k=3σ                      |
-| Clipping        | k=σ                       |
-| HampelThreePart | a=3σ,b=4σ,c=5σ            |
-| SαSNL           | α=α',scale=c',location=δ' |
-| SoftClipping    | k=σ                       |
-| TurkeyBiweight  | k=3σ                      |
+| Nonlinear             | Parameter                 |
+| --------------------- | ------------------------- |
+| Arctangent            | α=1                       |
+| Blanking              | k=3σ                      |
+| CauchyNL              | k=3σ                      |
+| Clipping              | k=σ                       |
+| HampelThreePart       | a=3σ,b=4σ,c=5σ            |
+| SαSNL                 | α=α',scale=c',location=δ' |
+| SoftClipping          | k=σ                       |
+| TurkeyBiweight        | k=3σ                      |
+| InverseHyperbolicSine | θ=σ                       |
 
 σ is median absolution deviation of the simulated data. a', c' and δ' are the estimated pararamters of IID Symmetric α-Stable distributions based on the simulated data. Root Mean Squared Errors (RMSEs) between the true chirp signals and filtered signals with respect to nonlinear functions and Generalizad Signal-to-Noise Ratios (GSNRs) are as follows. 
 ```julia

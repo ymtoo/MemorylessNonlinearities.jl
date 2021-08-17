@@ -57,7 +57,8 @@ function simulate(gs=nothing;
                                  (HampelThreePart, 3 * σ, 4 * σ, 5 * σ),
                                  (SαSNL, d.α, d.scale, d.location),
                                  (SoftClipping, σ),
-                                 (TurkeyBiweight, 3 * σ)])
+                                 (TurkeyBiweight, 3 * σ),
+                                 (InverseHyperbolicSine, σ)])
             for (k, g) in enumerate(gs)
                 ŝ = MemorylessNonlinearities.filt(g[1](g[2:end]...), x)
                 (smoothen !== nothing) && (ŝ = mapwindow(smoothen, ŝ, (11,)))
