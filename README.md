@@ -1,6 +1,6 @@
 # MemorylessNonlinearities
 
-[![Build Status](https://travis-ci.com/ymtoo/MemorylessNonlinearities.jl.svg?branch=master)](https://travis-ci.com/ymtoo/MemorylessNonlinearities.jl)
+[![CI](https://github.com/ymtoo/MemorylessNonlinearities.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/ymtoo/MemorylessNonlinearities.jl/actions/workflows/CI.yml)
 [![Coverage](https://codecov.io/gh/ymtoo/MemorylessNonlinearities.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/ymtoo/MemorylessNonlinearities.jl)
 
 This package implements a set of memoryless nonlinearity functions for impulsive noise suppression.
