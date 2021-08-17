@@ -1,7 +1,7 @@
 name = "MemorylessNonlinearities"
 uuid = "0fdea88e-d355-4a76-8041-e2244589d5bd"
 authors = ["Too Yuen Min"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 AlphaStableDistributions = "f20549b4-2d50-407f-863c-cdd202ba59a3"
